@@ -3,7 +3,7 @@ const PI:f32 = 3.14159;
 fn main() {
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
     /* Mi primer hola mundo :D */
-    println!("Hello, world!");
+    println!("Holiwi de kiwi mundo! :D");
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
     /* Ejemplo con tipos de datos primitivos */
@@ -28,6 +28,18 @@ fn main() {
     //bucle_infinito();
     //bucle_white();
     //bucle_for();
+
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    /* Utilizar un vector como ArrayList */
+    //como_usar_listas();
+
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    /* Estructura de control match, antes Switch(){case XXX: break; default: break;} */
+    //estructura_match();
+
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    /* Funciones inline para guardar su valor de retorno en una variable */
+    //funciones_inline();
 }
 
 
@@ -167,6 +179,81 @@ fn  bucle_for(){
         print!("{}, ", x);
     }
 }
+fn como_usar_listas(){
+    // Crear un vector vacío con esta sintaxis
+    // let nombreVariable:Vec<tipoDeDato> = Vec::new();
+    let mut mi_lista: Vec<i32> = Vec::new();
+
+    // Agregar elementos al vector
+    mi_lista.push(1);
+    mi_lista.push(2);
+    mi_lista.push(3);
+    mi_lista.push(4);
+    mi_lista.push(5);
+
+    // Acceder a elementos del vector
+    println!("Segundo elemento: {}", mi_lista[1]);
+
+    /* En Rust, Some es uno de los dos variantes del tipo de dato enum llamado Option.
+       Option se utiliza para representar la posibilidad de que un valor esté presente
+       (Some) o ausente (None). Es comúnmente utilizado para manejar casos en los que
+       una operación puede fallar sin tener que recurrir a manejo de errores tradicional.*/
+    // Eliminar el último elemento y obtener el valor eliminado
+    if let Some(valor_eliminado) = mi_lista.pop() {
+        println!("Valor eliminado: {}", valor_eliminado);
+    } else {
+        println!("La lista estaba vacía, no se eliminó ningún valor.");
+    }
+
+    // Iterar sobre el vector
+    for elemento in mi_lista {
+        println!("Elemento: {}", elemento);
+    }
+}
+
+fn estructura_match(){
+    let x:i32 = 5;
+
+    // Solo aplica la primer condicion encontrada, si tenemos 2 o mas donde nuestro valor
+    // califique, entonces solo sera valida la que este mas arriba
+
+    match x {
+        0 => {
+            println!("encontré 0");
+        }
+        // podemos hacer comparaciones con múltiples valores
+        1 | 5 => {
+            println!("encontré 1 o 5!");
+        }
+        // podemos hacer comparaciones con iteradores
+        3..=9 => {
+            println!("encontré un número entre 3 y 9, ambos incluidos");
+        }
+        // podemos asignar el valor encontrado a una variable
+        matched_num @ 10..=100 => {
+            println!("encontré {}, un número entre 10 y 100!", matched_num);
+        }
+
+        // En caso de no cumplir ninguna condicion, el valor default de la estructura
+        _ => {
+            println!("No encontré ninguna condicion! >:D");
+        }
+    }
+}
+fn funciones_inline(){
+    let x:i16 = 20;
+    // Expresión ternaria en Rust, mejor conocido como if inline, delegado, etc.
+    let operacion_ternaria:&str = if x > 18 { "Es mayor de edad" } else { "Es menor de edad" };
+    println!("Resultado ternario: {}", operacion_ternaria);
+
+    // funciones inline
+    let operacion:i32 = {
+        let x = 45;
+        x * x
+    };
+    println!("Resultado= {}", operacion);
+}
+
 
 
 /* Funciones con valor de retorno */
